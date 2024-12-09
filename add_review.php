@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
     $bookTitle = $_POST['book_title'];
     $comment = $_POST['review'];
     $user = $_POST['username'];
-}
+
 
 try {
     // Connect to the database
@@ -59,6 +59,7 @@ try {
 
 // Close the connection
 $conn = null;
+}
 ?>
 
 <?php include 'includes/footer.php'; ?>

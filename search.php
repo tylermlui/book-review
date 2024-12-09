@@ -47,6 +47,7 @@ include 'includes/header.php';
             if ($result) {
                 // Loop through and display the results
                 foreach ($result as $row) {
+                    // need to format output 
                     echo "<p>Author: " . $row['author'] . "</p><br>";
                     echo "<p>Rating: " . $row['rating'] . "</p><br>";
                     echo "<p>Number of Reviews: " . $row['numReviews'] . "</p><br><br>";
