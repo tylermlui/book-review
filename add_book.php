@@ -7,7 +7,7 @@ include 'includes/header.php';
     <form method="POST" action="">
         <input type="text" name="book_title" placeholder="Book Title" required>
         <input type="text" name="author" placeholder="Author" required>
-        <button type="submit">Add Book</button>
+        <button name="submit" type="submit">Add Book</button>
     </form>
 </main>
 
