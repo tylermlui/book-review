@@ -44,6 +44,23 @@ include 'includes/header.php';
             // Fetch results
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+            $sql = "SELECT * FROM reviews WHERE bookTitle LIKE :searchTitle";  // Use LIKE for partial matching
+
+            // Prepare the statement
+            $stmt = $conn->prepare($sql);
+
+            // Add wildcards to the title for partial matching
+            $searchTitle = "%" . $searchTitleInit . "%";  // Add % to allow partial matching
+
+            // Bind the parameter
+            $stmt->bindParam(':searchTitle', $searchTitle);
+
+            // Execute the query
+            $stmt->execute();
+
+            // Fetch results
+            $reviewResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
             if ($result) {
                 // Loop through and display the results
                 foreach ($result as $row) {
@@ -51,6 +68,11 @@ include 'includes/header.php';
                     echo "<p>Author: " . $row['author'] . "</p><br>";
                     echo "<p>Rating: " . $row['rating'] . "</p><br>";
                     echo "<p>Number of Reviews: " . $row['numReviews'] . "</p><br><br>";
+                    foreach ($reviewResult as $review) { // loop through reviews here
+                        echo "<p>Username: " . $review['username'] . "</p><br>";
+                        echo "<p>Rating: " . $review['rating'] . "/5</p><br>";
+                        echo "<p>Comment: " . $review['comment'] . "</p><br>";
+                    }
                 }
             } else {
                 // No results found
