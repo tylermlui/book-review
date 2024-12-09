@@ -67,6 +67,17 @@ try {
         echo "Failed to update the number of reviews.";
     }
 
+    $sql = "UPDATE books SET rating = rating + :rating WHERE title = :bookTitle";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':bookTitle', $bookTitle); 
+    $stmt->bindParam(':rating', $rating); 
+
+    if ($stmt->execute()) {
+        echo "Number of reviews updated successfully!";
+    } else {
+        echo "Failed to update the number of reviews.";
+    }
+
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
