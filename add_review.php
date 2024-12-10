@@ -33,15 +33,15 @@ if (isset($_POST['submit'])) {
 
 try {
     // Connect to the database
-    $conn = new PDO("mysql:host=$host;dbname=$dbname", $subject, $password);
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Book review details
     $id = NULL;
 
     // SQL query to insert data
-    $sql = "INSERT INTO reviews (id, bookTitle, rating, comment, subject) 
-            VALUES (:id, :bookTitle, :rating, :comment, :subject)";
+    $sql = "INSERT INTO reviews (id, bookTitle, rating, comment, username) 
+            VALUES (:id, :bookTitle, :rating, :comment, :username)";
 
     // Prepare and execute the statement
     $stmt = $conn->prepare($sql);
@@ -49,7 +49,7 @@ try {
     $stmt->bindParam(':bookTitle', $bookTitle);
     $stmt->bindParam(':rating', $rating);
     $stmt->bindParam(':comment', $comment);
-    $stmt->bindParam(':subject', $user);
+    $stmt->bindParam(':username', $subject);
 
     if ($stmt->execute()) {
         echo "Book review added successfully!";
