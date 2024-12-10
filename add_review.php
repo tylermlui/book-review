@@ -39,6 +39,12 @@ try {
     // Book review details
     $id = NULL;
 
+    $checkBookSql = "SELECT * FROM books WHERE title = :bookTitle";
+    $checkStmt = $conn->prepare($checkBookSql);
+    $checkStmt->bindParam(':bookTitle', $bookTitle);
+    $checkStmt->execute();
+
+    if ($checkStmt->rowCount() > 0) {
     // SQL query to insert data
     $sql = "INSERT INTO reviews (id, bookTitle, rating, comment, username) 
             VALUES (:id, :bookTitle, :rating, :comment, :username)";
@@ -51,7 +57,7 @@ try {
     $stmt->bindParam(':comment', $comment);
     $stmt->bindParam(':username', $subject);
 
-    if ($stmt->execute()) {
+    if ($stmt->execute()    ) {
         echo "Book review added successfully!";
     } else {
         echo "Failed to add the book review.";
@@ -77,6 +83,10 @@ try {
     } else {
         echo "Failed to update the number of reviews.";
     }
+}
+else {
+    echo "<p>Book not foumd, it needs to be added before the review</p>";
+}
 
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
