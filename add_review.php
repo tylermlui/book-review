@@ -85,7 +85,7 @@ try {
     }
 }
 else {
-    echo "<p>Book not foumd, it needs to be added before the review</p>";
+    echo "<p>Book not found, it needs to be added before the review</p>";
 }
 
 } catch (PDOException $e) {
