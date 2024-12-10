@@ -66,6 +66,7 @@ include 'includes/header.php';
                 foreach ($result as $row) {
                     $score = ($row['numReviews'] > 0) ? $row['rating'] / $row['numReviews'] : 0;
                     // need to format output 
+                    echo "<p>Title: " . $row['title'] . "</p><br>";
                     echo "<p>Author: " . $row['author'] . "</p><br>";
                     echo "<p><strong>Average Rating:</strong> " . number_format($score, 2) . "/5</p>";
                     echo "<p>Number of Reviews: " . $row['numReviews'] . "</p><br><br>";
