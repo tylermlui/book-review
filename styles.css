@@ -225,3 +225,70 @@ label[for="rating"] {
     color: #a1a1a1;
     font-size: 0.9rem;
 }
+.search-result-container {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.book-info h3 {
+    color: #ffffff;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.book-info .author {
+    color: #a1a1a1;
+    margin-bottom: 15px;
+}
+
+.rating-summary {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    color: #a1a1a1;
+}
+
+.reviews-container {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 15px;
+}
+
+.review {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #a1a1a1;
+}
+
+.reviewer {
+    font-weight: 300;
+}
+
+.review-rating {
+    color: #ffffff;
+}
+
+.review-text {
+    color: #d0d0d0;
+    line-height: 1.6;
+}
+
+.no-reviews, .no-results, .error {
+    text-align: center;
+    color: #a1a1a1;
+    margin-top: 20px;
+}

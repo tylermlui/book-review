@@ -8,7 +8,6 @@ include 'includes/header.php';
         <input type="text" name="query" placeholder="Enter book title..." required>
         <button type="submit">Search</button>
     </form>
-</main>
 
     <?php
     // Database connection details
@@ -65,29 +64,52 @@ include 'includes/header.php';
                 // Loop through and display the results
                 foreach ($result as $row) {
                     $score = ($row['numReviews'] > 0) ? $row['rating'] / $row['numReviews'] : 0;
-                    // need to format output 
-                    echo "<p>Title: " . $row['title'] . "</p><br>";
-                    echo "<p>Author: " . $row['author'] . "</p><br>";
-                    echo "<p><strong>Average Rating:</strong> " . number_format($score, 2) . "/5</p>";
-                    echo "<p>Number of Reviews: " . $row['numReviews'] . "</p><br><br>";
-                    foreach ($reviewResult as $review) { // loop through reviews here
-                        echo "<p>Subject: " . $review['username'] . "</p><br>";
-                        echo "<p>Rating: " . $review['rating'] . "/5</p><br>";
-                        echo "<p>Comment: " . $review['comment'] . "</p><br>";
-                    }
+                    ?>
+                    <div class="search-result-container">
+                        <div class="book-info">
+                            <h3><?php echo htmlspecialchars($row['title']); ?></h3>
+                            <p class="author">By <?php echo htmlspecialchars($row['author']); ?></p>
+                            <div class="rating-summary">
+                                <span class="avg-rating">Average Rating: <?php echo number_format($score, 2); ?>/5</span>
+                                <span class="review-count"><?php echo $row['numReviews']; ?> Reviews</span>
+                            </div>
+                        </div>
+
+                        <div class="reviews-container">
+                            <?php 
+                            if (!empty($reviewResult)) {
+                                foreach ($reviewResult as $review) { 
+                            ?>
+                                <div class="review">
+                                    <div class="review-header">
+                                        <span class="reviewer"> Subject: <?php echo htmlspecialchars($review['username']); ?></span>
+                                        <span class="review-rating"><?php echo $review['rating']; ?>/5</span>
+                                    </div>
+                                    <p class="review-text"><?php echo htmlspecialchars($review['comment']); ?></p>
+                                </div>
+                            <?php 
+                                }
+                            } else {
+                                echo "<p class='no-reviews'>No reviews yet</p>";
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <?php
                 }
             } else {
                 // No results found
-                echo "<p>No book found with the title '$searchTitleInit'.</p>";
+                echo "<p class='no-results'>No book found with the title '" . htmlspecialchars($searchTitleInit) . "'.</p>";
             }
         } catch (PDOException $e) {
             // Error handling
-            echo "Error: " . $e->getMessage();
+            echo "<p class='error'>Error: " . htmlspecialchars($e->getMessage()) . "</p>";
         }
 
         // Close the connection
         $conn = null;
     }
     ?>
+</main>
 
 <?php include 'includes/footer.php'; ?>
